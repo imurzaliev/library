@@ -4,11 +4,50 @@ let myLibrary = [
   ["Catch 22", "Joseph Heller", 463, true],
 ];
 
-const shelf = document.querySelector(".shelf");
+const container = document.querySelector(".container");
 const addButton = document.querySelector(".new-book");
+const shelf = document.querySelector(".shelf");
 
 addButton.addEventListener("click", () => {
-  const newBook = document.createElement("div");
+  const form = document.createElement("div");
+  form.classList.add("form");
+  form.setAttribute("method", "post");
+  const newTitle = document.createElement("input");
+  newTitle.setAttribute("type", "text");
+  newTitle.setAttribute("placeholder", "Title");
+  const newAuthor = document.createElement("input");
+  newAuthor.setAttribute("type", "text");
+  newAuthor.setAttribute("placeholder", "Author");
+  const newPages = document.createElement("input");
+  newPages.setAttribute("type", "text");
+  newPages.setAttribute("placeholder", "Number of Pages");
+  const newRead = document.createElement("label");
+  newRead.innerText = "Have read?";
+  const yes = document.createElement("input");
+  yes.setAttribute("type", "checkbox");
+  newRead.appendChild(yes);
+  const submitButton = document.createElement("button");
+  submitButton.classList.add("submit-button");
+  submitButton.innerText = "Add";
+  form.appendChild(newTitle);
+  form.appendChild(newAuthor);
+  form.appendChild(newPages);
+  form.appendChild(newRead);
+  form.appendChild(submitButton);
+  shelf.appendChild(form);
+
+  submitButton.addEventListener("click", () => {
+    let newArr = [[]];
+    newArr[0].push(
+      newTitle.value,
+      newAuthor.value,
+      newPages.value,
+      yes.checked
+    );
+    myLibrary = myLibrary.concat(newArr);
+    clearScreen();
+    display();
+  });
 });
 
 function Book(title, author, pages, read) {
@@ -23,6 +62,12 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(userInput) {
   myLibrary = myLibrary.concat(userInput);
+}
+
+function clearScreen() {
+  while (shelf.firstChild) {
+    shelf.removeChild(shelf.lastChild);
+  }
 }
 
 function display() {

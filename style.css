@@ -26,7 +26,8 @@ body {
   flex-wrap: wrap;
 }
 
-.books {
+.books,
+.form {
   background-color: var(--secondary-color);
   width: 10rem;
   height: 15rem;
@@ -35,6 +36,95 @@ body {
   padding: 10px;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 footer {
   background-color: var(--color-three);
+}
+
+.deleteBtn {
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 27px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.new-book {
+  background-color: var(--color-four);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  top: 30px;
+  right: 30px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container input[type="checkbox"] {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type="text"]:focus,
+.form-container input[type="number"]:focus,
+.form-container input[type="checkbox"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
 }

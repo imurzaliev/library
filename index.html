@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="./book.js" defer></script>
+    <script src="./app.js" defer></script>
     <link rel="stylesheet" href="./style.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,8 +12,28 @@
     <header><h1>My Library</h1></header>
     <main>
       <div class="container">
-        <button class="new-book">NEW BOOK</button>
+        <button class="new-book" onclick="openForm()">NEW BOOK</button>
         <div class="shelf"></div>
+        <div class="form-popup" id="myForm">
+          <form class="form-container">
+            <h1>Book Details</h1>
+
+            <label for="Title"><b>Title</b></label>
+            <input id="title" type="text" placeholder="Book Title" required />
+
+            <label for="author"><b>Author</b></label>
+            <input id="author" type="text" placeholder="Author" required />
+
+            <label for="pages"><b>Number of Pages</b></label>
+            <input id="pages" type="number" required />
+            <label for="read"><b>Have you read it?</b></label>
+            <input id="read" type="checkbox" />
+            <button type="submit" class="btn">Add</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">
+              Close
+            </button>
+          </form>
+        </div>
       </div>
     </main>
     <footer>Iskender Murzaliev © 2022</footer>
