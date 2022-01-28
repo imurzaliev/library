@@ -57,6 +57,12 @@ class UI {
     document.querySelector("#pages").value = "";
     document.querySelector("#read").checked = false;
   }
+
+  static deleteBook(el) {
+    if (el.classList.contains("deleteBtn")) {
+      el.parentElement.remove();
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
@@ -74,6 +80,10 @@ document.querySelector("#myForm").addEventListener("submit", (e) => {
   UI.addBookToShelf(book);
   UI.clearForm();
   closeForm();
+});
+
+shelf.addEventListener("click", (e) => {
+  UI.deleteBook(e.target);
 });
 
 function openForm() {
