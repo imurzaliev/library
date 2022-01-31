@@ -13,18 +13,18 @@ const shelf = document.querySelector(".shelf");
 
 class UI {
   static displayBooks() {
-    const myLibrary = [
-      { title: "1984", author: "George Orwell", pages: 328, read: true },
-      {
-        title: "Fahrenheit 451",
-        author: "Ray Bradbury",
-        pages: 249,
-        read: false,
-      },
-      { title: "Catch 22", author: "Joseph Heller", pages: 463, read: true },
-    ];
+    // const myLibrary = [
+    //   { title: "1984", author: "George Orwell", pages: 328, read: true },
+    //   {
+    //     title: "Fahrenheit 451",
+    //     author: "Ray Bradbury",
+    //     pages: 249,
+    //     read: false,
+    //   },
+    //   { title: "Catch 22", author: "Joseph Heller", pages: 463, read: true },
+    // ];
 
-    const books = myLibrary;
+    const books = Store.getBooks();
 
     books.forEach((book) => UI.addBookToShelf(book));
   }
@@ -89,6 +89,34 @@ class UI {
   }
 }
 
+class Store {
+  static getBooks() {
+    let books;
+    if (localStorage.getItem("books") === null) {
+      return (books = []);
+    } else {
+      return (books = JSON.parse(localStorage.getItem("books")));
+    }
+  }
+
+  static addBook(book) {
+    const books = Store.getBooks();
+    books.push(book);
+    localStorage.setItem("books", JSON.stringify(books));
+  }
+
+  static removeBook(title) {
+    const books = Store.getBooks();
+    books.forEach((book, index) => {
+      if (book.title === title) {
+        return books.splice(index, 1);
+      }
+    });
+
+    localStorage.setItem("books", JSON.stringify(books));
+  }
+}
+
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
 
 document.querySelector("#myForm").addEventListener("submit", (e) => {
@@ -102,12 +130,18 @@ document.querySelector("#myForm").addEventListener("submit", (e) => {
   const book = new Book(title, author, pages, read);
 
   UI.addBookToShelf(book);
+
+  Store.addBook(book);
+
   UI.clearForm();
   closeForm();
 });
 
 shelf.addEventListener("click", (e) => {
   UI.deleteBook(e.target);
+  Store.removeBook(
+    e.target.parentElement.parentElement.firstElementChild.innerText
+  );
 });
 
 function openForm() {
