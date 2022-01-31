@@ -35,19 +35,43 @@ class UI {
     const bookAuthor = document.createElement("h3");
     const bookPages = document.createElement("p");
     const bookStatus = document.createElement("p");
-    const deleteCard = document.createElement("p");
-    deleteCard.innerText = "X";
+    const buttonsOnCard = document.createElement("div");
+    const deleteCard = document.createElement("button");
+    const doneButton = document.createElement("button");
+
+    buttonsOnCard.classList.add("buttons-on-card");
+    doneButton.classList.add("done");
     deleteCard.classList.add("deleteBtn");
     card.classList.add("books");
+
+    doneButton.innerText = "Done";
+    deleteCard.innerText = "X";
     bookTitle.innerText = book.title;
     bookAuthor.innerText = `by ${book.author}`;
     bookPages.innerText = `Number of pages: ${book.pages}`;
-    bookStatus.innerText = `Have read? ${book.read ? "Yes" : "No"}`;
+
+    doneButton.addEventListener("click", () => {
+      book.read = !book.read;
+      if (book.read) {
+        bookStatus.innerText = "Read";
+      } else {
+        bookStatus.innerText = "Not read";
+      }
+    });
+
+    if (book.read) {
+      bookStatus.innerText = "Read";
+    } else {
+      bookStatus.innerText = "Not read";
+    }
+
     card.appendChild(bookTitle);
     card.appendChild(bookAuthor);
     card.appendChild(bookPages);
     card.appendChild(bookStatus);
-    card.appendChild(deleteCard);
+    buttonsOnCard.appendChild(deleteCard);
+    buttonsOnCard.appendChild(doneButton);
+    card.appendChild(buttonsOnCard);
     shelf.appendChild(card);
   }
 
@@ -60,7 +84,7 @@ class UI {
 
   static deleteBook(el) {
     if (el.classList.contains("deleteBtn")) {
-      el.parentElement.remove();
+      el.parentElement.parentElement.remove();
     }
   }
 }

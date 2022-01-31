@@ -46,13 +46,27 @@ footer {
   background-color: var(--color-three);
 }
 
-.deleteBtn {
+.buttons-on-card {
+  display: flex;
+  justify-content: space-around;
+}
+
+.deleteBtn,
+.done {
   cursor: pointer;
   border: 1px solid white;
+  background-color: var(--secondary-color);
+  width: 3rem;
   border-radius: 5px;
-  width: 27px;
   color: white;
   font-weight: bold;
+  padding: 5px;
+}
+
+.deleteBtn:hover,
+.done:hover {
+  border: 1px solid yellow;
+  box-shadow: 0 0 1em;
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
